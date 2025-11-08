@@ -1,24 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu, X, Rocket, Github, Linkedin } from 'lucide-react';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const navItems = [
     { label: 'Home', href: '#home' },
-    { label: 'Projects', href: '#projects' },
+    { label: 'Apps', href: '#projects' },
     { label: 'Contact', href: '#contact' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
+        scrolled ? 'backdrop-blur-md bg-black/40 border-b border-white/10 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.6)]' : 'bg-transparent'
+      }`}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <a href="#home" className="flex items-center gap-2 text-white">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/20 ring-1 ring-inset ring-indigo-400/40">
               <Rocket size={18} className="text-indigo-300" />
             </span>
-            <span className="font-semibold tracking-tight">MyPortfolio</span>
+            <span className="font-semibold tracking-tight">MobileDev</span>
           </a>
 
           <nav className="hidden md:flex items-center gap-8">

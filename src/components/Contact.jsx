@@ -1,5 +1,6 @@
-import { Mail, Send } from 'lucide-react';
+import { Mail, Send, Phone } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Contact() {
   const [status, setStatus] = useState('');
@@ -13,14 +14,21 @@ export default function Contact() {
     <section id="contact" className="relative py-24 bg-[#0A0A0F]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10">
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Let’s work together</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Let’s build your app</h2>
           <p className="mt-2 text-white/60 max-w-2xl">
-            Have an idea in mind? Tell me about your project and timeline.
+            Tell me about your mobile project, platform, and timeline.
           </p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2">
-          <form onSubmit={handleSubmit} className="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <motion.form
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            onSubmit={handleSubmit}
+            className="rounded-2xl border border-white/10 bg-white/5 p-6"
+          >
             <div className="grid gap-4">
               <div>
                 <label className="block text-sm text-white/70">Name</label>
@@ -31,22 +39,32 @@ export default function Contact() {
                   placeholder="Your name"
                 />
               </div>
-              <div>
-                <label className="block text-sm text-white/70">Email</label>
-                <input
-                  type="email"
-                  required
-                  className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
-                  placeholder="you@example.com"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm text-white/70">Email</label>
+                  <input
+                    type="email"
+                    required
+                    className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-white/70">Phone</label>
+                  <input
+                    type="tel"
+                    className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                    placeholder="Optional"
+                  />
+                </div>
               </div>
               <div>
-                <label className="block text-sm text-white/70">Message</label>
+                <label className="block text-sm text-white/70">Project details</label>
                 <textarea
                   rows={4}
                   required
                   className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
-                  placeholder="Tell me about your project..."
+                  placeholder="Platforms, features, deadlines..."
                 />
               </div>
               <button
@@ -62,12 +80,18 @@ export default function Contact() {
                 </p>
               )}
             </div>
-          </form>
+          </motion.form>
 
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/0 p-6">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/0 p-6"
+          >
             <div className="flex items-center gap-3">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/20 ring-1 ring-inset ring-indigo-400/40">
-                <Mail className="text-indigo-300" size={18} />
+                <Phone className="text-indigo-300" size={18} />
               </span>
               <div>
                 <h3 className="text-white font-medium">Direct contact</h3>
@@ -76,10 +100,10 @@ export default function Contact() {
             </div>
             <ul className="mt-6 space-y-3 text-sm text-white/70">
               <li>• I typically reply within 24 hours</li>
+              <li>• iOS, Android, and cross‑platform</li>
               <li>• Available for freelance and contract work</li>
-              <li>• Based in your city, working remotely worldwide</li>
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

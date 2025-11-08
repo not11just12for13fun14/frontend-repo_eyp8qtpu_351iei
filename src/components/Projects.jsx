@@ -1,28 +1,29 @@
-import { Code2, Globe, Layers } from 'lucide-react';
+import { AppWindow, Code2, DownloadCloud, Smartphone } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const projects = [
   {
-    title: 'Interactive 3D Landing',
+    title: 'FitTrack Pro',
     description:
-      'A playful hero built with Spline and React, featuring smooth motion and responsive design.',
-    tags: ['React', 'Spline', 'Tailwind'],
-    icon: Globe,
+      'A cross-platform fitness tracker with offline-first data and animated charts.',
+    tags: ['React Native', 'Reanimated', 'SQLite'],
+    icon: Smartphone,
     link: '#',
   },
   {
-    title: 'API Starter Kit',
+    title: 'QuickScan',
     description:
-      'A production-ready FastAPI template with auth, testing, and Docker support.',
-    tags: ['FastAPI', 'MongoDB', 'Python'],
-    icon: Layers,
+      'Document scanner with ML-based edge detection and PDF export.',
+    tags: ['Flutter', 'TFLite', 'Dart'],
+    icon: AppWindow,
     link: '#',
   },
   {
-    title: 'UI Components Pack',
+    title: 'Budgeteer',
     description:
-      'A polished set of accessible UI components following shadcn/ui patterns.',
-    tags: ['React', 'Radix', 'Design'],
-    icon: Code2,
+      'Personal finance app with bank syncing and delightful micro-interactions.',
+    tags: ['Kotlin', 'Compose', 'Coroutines'],
+    icon: DownloadCloud,
     link: '#',
   },
 ];
@@ -35,30 +36,40 @@ function Tag({ children }) {
   );
 }
 
+const cardVariants = {
+  off: { opacity: 0, y: 16 },
+  on: (i) => ({ opacity: 1, y: 0, transition: { delay: 0.1 * i, duration: 0.5 } }),
+};
+
 export default function Projects() {
   return (
     <section id="projects" className="relative py-24 bg-[#0A0A0F]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Selected Projects</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Mobile Apps</h2>
             <p className="mt-2 text-white/60 max-w-2xl">
-              A snapshot of things I loved building recently.
+              A few highlights from recent mobile projects across platforms.
             </p>
           </div>
           <a
             href="#contact"
             className="hidden sm:inline-flex rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm text-white hover:bg-white/10"
           >
-            Get a quote
+            Start a project
           </a>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p) => {
+          {projects.map((p, i) => {
             const Icon = p.icon;
             return (
-              <a
+              <motion.a
+                custom={i}
+                initial="off"
+                whileInView="on"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={cardVariants}
                 key={p.title}
                 href={p.link}
                 className="group rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/0 p-5 transition hover:border-white/20 hover:from-white/10"
@@ -76,7 +87,7 @@ export default function Projects() {
                     <Tag key={t}>{t}</Tag>
                   ))}
                 </div>
-              </a>
+              </motion.a>
             );
           })}
         </div>
